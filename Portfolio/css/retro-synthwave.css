@@ -1,0 +1,658 @@
+/* ==========================================================================
+   RETRO SYNTHWAVE / 90s ARCADE STYLESHEET
+   Neon purples, Hot Pinks, Electric Cyan, Dark Wireframes, CRT Scanlines
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Press+Start+2P&family=Rajdhani:wght@500;600;700&family=VT323&display=swap');
+
+:root {
+  --neon-pink: #ff007f;
+  --neon-pink-glow: rgba(255, 0, 127, 0.65);
+  --neon-cyan: #00f3ff;
+  --neon-cyan-glow: rgba(0, 243, 255, 0.65);
+  --neon-purple: #b026ff;
+  --neon-purple-glow: rgba(176, 38, 255, 0.65);
+  --neon-yellow: #ffe600;
+  --neon-yellow-glow: rgba(255, 230, 0, 0.65);
+  --neon-orange: #ff6000;
+  --dark-bg: #08020f;
+  --dark-card: rgba(18, 7, 36, 0.88);
+  --dark-border: rgba(176, 38, 255, 0.4);
+}
+
+/* Base Body & Reset */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--dark-bg);
+  color: #e2e8f0;
+  font-family: 'Rajdhani', sans-serif;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Custom Selection */
+::selection {
+  background: var(--neon-pink);
+  color: #ffffff;
+  text-shadow: 0 0 8px #ffffff;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0d041a;
+  border-left: 1px solid rgba(176, 38, 255, 0.3);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--neon-pink), var(--neon-purple), var(--neon-cyan));
+  border-radius: 2px;
+  box-shadow: 0 0 10px var(--neon-pink);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--neon-cyan), var(--neon-pink));
+}
+
+/* Font Classes */
+.font-arcade {
+  font-family: 'Press Start 2P', monospace;
+}
+.font-terminal {
+  font-family: 'VT323', monospace;
+}
+.font-cyber {
+  font-family: 'Orbitron', sans-serif;
+}
+.font-tech {
+  font-family: 'Rajdhani', sans-serif;
+}
+
+/* Neon Text Glow Utilities */
+.neon-text-pink {
+  color: #ff3399;
+  text-shadow:
+    0 0 4px #fff,
+    0 0 10px var(--neon-pink),
+    0 0 20px var(--neon-pink),
+    0 0 40px var(--neon-pink);
+}
+
+.neon-text-cyan {
+  color: #38f8ff;
+  text-shadow:
+    0 0 4px #fff,
+    0 0 10px var(--neon-cyan),
+    0 0 20px var(--neon-cyan),
+    0 0 40px var(--neon-cyan);
+}
+
+.neon-text-purple {
+  color: #c766ff;
+  text-shadow:
+    0 0 4px #fff,
+    0 0 10px var(--neon-purple),
+    0 0 20px var(--neon-purple),
+    0 0 40px var(--neon-purple);
+}
+
+.neon-text-yellow {
+  color: #fff166;
+  text-shadow:
+    0 0 4px #fff,
+    0 0 10px var(--neon-yellow),
+    0 0 20px var(--neon-yellow),
+    0 0 40px var(--neon-yellow);
+}
+
+/* Neon Border & Box Glow Utilities */
+.neon-border-pink {
+  border-color: var(--neon-pink);
+  box-shadow: 0 0 15px rgba(255, 0, 127, 0.45), inset 0 0 10px rgba(255, 0, 127, 0.2);
+}
+
+.neon-border-cyan {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 15px rgba(0, 243, 255, 0.45), inset 0 0 10px rgba(0, 243, 255, 0.2);
+}
+
+.neon-border-purple {
+  border-color: var(--neon-purple);
+  box-shadow: 0 0 15px rgba(176, 38, 255, 0.45), inset 0 0 10px rgba(176, 38, 255, 0.2);
+}
+
+.neon-glow-dual {
+  box-shadow:
+    0 0 20px rgba(255, 0, 127, 0.35),
+    inset 0 0 15px rgba(0, 243, 255, 0.25);
+}
+
+/* ==========================================================================
+   ANIMATED SYNTHWAVE PERSPECTIVE GRID BACKGROUND
+   ========================================================================== */
+.synthwave-bg-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 30%, #20083b 0%, #0d031c 60%, #05010a 100%);
+  pointer-events: none;
+}
+
+/* Twinkling Starfield */
+.synthwave-stars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 55%;
+  background-image: 
+    radial-gradient(1px 1px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 80px 140px, var(--neon-cyan), rgba(0,0,0,0)),
+    radial-gradient(1.5px 1.5px at 150px 70px, var(--neon-pink), rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 240px 190px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 320px 110px, var(--neon-yellow), rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 450px 40px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(1.5px 1.5px at 580px 180px, var(--neon-cyan), rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 700px 90px, var(--neon-pink), rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 830px 160px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 950px 50px, var(--neon-cyan), rgba(0,0,0,0));
+  background-repeat: repeat;
+  background-size: 500px 250px;
+  opacity: 0.85;
+}
+
+/* Retro Striped Neon Sun */
+.synthwave-sun {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #ffe600 0%, #ff6000 40%, #ff007f 80%, #7900ff 100%);
+  box-shadow: 
+    0 0 60px rgba(255, 96, 0, 0.7),
+    0 0 120px rgba(255, 0, 127, 0.5),
+    0 0 180px rgba(176, 38, 255, 0.3);
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 48%,
+    transparent 48%,
+    transparent 51%,
+    #000 51%,
+    #000 59%,
+    transparent 59%,
+    transparent 63%,
+    #000 63%,
+    #000 70%,
+    transparent 70%,
+    transparent 75%,
+    #000 75%,
+    #000 81%,
+    transparent 81%,
+    transparent 87%,
+    #000 87%,
+    #000 93%,
+    transparent 93%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 48%,
+    transparent 48%,
+    transparent 51%,
+    #000 51%,
+    #000 59%,
+    transparent 59%,
+    transparent 63%,
+    #000 63%,
+    #000 70%,
+    transparent 70%,
+    transparent 75%,
+    #000 75%,
+    #000 81%,
+    transparent 81%,
+    transparent 87%,
+    #000 87%,
+    #000 93%,
+    transparent 93%,
+    transparent 100%
+  );
+  opacity: 0.65;
+}
+
+/* Horizon Glow Line */
+.synthwave-horizon {
+  position: absolute;
+  top: 48%;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent 0%, var(--neon-cyan) 25%, var(--neon-pink) 50%, var(--neon-cyan) 75%, transparent 100%);
+  box-shadow: 
+    0 0 20px var(--neon-pink),
+    0 0 40px var(--neon-cyan);
+}
+
+/* 3D Wireframe Perspective Grid Floor */
+.synthwave-grid-floor {
+  position: absolute;
+  top: 48%;
+  left: -50%;
+  width: 200%;
+  height: 100%;
+  perspective: 450px;
+  overflow: hidden;
+}
+
+.synthwave-grid-plane {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotateX(76deg);
+  transform-origin: top center;
+  background-image: 
+    linear-gradient(to right, rgba(0, 243, 255, 0.35) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 0, 127, 0.4) 1px, transparent 1px);
+  background-size: 60px 50px;
+  animation: gridScroll 1.6s linear infinite;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0) 95%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0) 95%);
+}
+
+@keyframes gridScroll {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 50px;
+  }
+}
+
+/* ==========================================================================
+   CRT SCANLINE & RETRO SCREEN OVERLAY
+   ========================================================================== */
+.crt-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* When active, show CRT effects */
+body.crt-active .crt-overlay {
+  display: block;
+}
+
+.crt-scanlines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.35) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.03),
+    rgba(0, 255, 0, 0.015),
+    rgba(0, 0, 255, 0.03)
+  );
+  background-size: 100% 4px, 6px 100%;
+  opacity: 0.95;
+}
+
+/* Vignette border & screen curvature effect */
+.crt-vignette {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(0, 243, 255, 0.15);
+}
+
+/* CRT Scanline Beam Sweeping */
+.crt-beam {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  opacity: 0.6;
+  animation: scanBeam 8s linear infinite;
+}
+
+@keyframes scanBeam {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+/* CRT Screen subtle flicker */
+body.crt-active {
+  animation: crtFlicker 0.15s infinite;
+}
+
+@keyframes crtFlicker {
+  0% { opacity: 0.992; }
+  50% { opacity: 1; }
+  100% { opacity: 0.995; }
+}
+
+/* ==========================================================================
+   CYBER & ARCADE COMPONENT STYLING
+   ========================================================================== */
+
+/* Cyber Angled Cut Corners */
+.cyber-card {
+  background: var(--dark-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--dark-border);
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  clip-path: polygon(
+    0 12px,
+    12px 0,
+    calc(100% - 12px) 0,
+    100% 12px,
+    100% calc(100% - 12px),
+    calc(100% - 12px) 100%,
+    12px 100%,
+    0 calc(100% - 12px)
+  );
+}
+
+.cyber-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--neon-pink);
+  box-shadow: 
+    0 12px 30px rgba(0, 0, 0, 0.7),
+    0 0 20px var(--neon-pink-glow),
+    inset 0 0 15px rgba(0, 243, 255, 0.15);
+}
+
+/* Cyber Button with Angled Corners */
+.cyber-btn {
+  position: relative;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #ffffff;
+  background: linear-gradient(135deg, rgba(255, 0, 127, 0.25) 0%, rgba(176, 38, 255, 0.35) 100%);
+  border: 1px solid var(--neon-pink);
+  box-shadow: 0 0 10px rgba(255, 0, 127, 0.35);
+  clip-path: polygon(
+    0 8px,
+    8px 0,
+    100% 0,
+    100% calc(100% - 8px),
+    calc(100% - 8px) 100%,
+    0 100%
+  );
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.cyber-btn:hover {
+  background: linear-gradient(135deg, var(--neon-pink) 0%, var(--neon-purple) 100%);
+  box-shadow: 
+    0 0 20px var(--neon-pink),
+    0 0 35px var(--neon-purple-glow);
+  transform: translateY(-2px);
+  color: #fff;
+  text-shadow: 0 0 8px #fff;
+}
+
+.cyber-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 0 10px var(--neon-pink);
+}
+
+/* Cyan Variant */
+.cyber-btn-cyan {
+  border-color: var(--neon-cyan);
+  background: linear-gradient(135deg, rgba(0, 243, 255, 0.2) 0%, rgba(176, 38, 255, 0.3) 100%);
+  box-shadow: 0 0 10px rgba(0, 243, 255, 0.35);
+}
+
+.cyber-btn-cyan:hover {
+  background: linear-gradient(135deg, var(--neon-cyan) 0%, #0088ff 100%);
+  box-shadow: 0 0 20px var(--neon-cyan), 0 0 35px rgba(0, 243, 255, 0.6);
+  color: #000;
+  text-shadow: none;
+  font-weight: bold;
+}
+
+/* Arcade Push Button (Round / 3D Bevel) */
+.arcade-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1.2rem;
+  border-radius: 9999px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  color: #fff;
+  cursor: pointer;
+  border: 2px solid;
+  transition: all 0.15s ease-out;
+  box-shadow: 0 5px 0 #000, 0 8px 15px rgba(0,0,0,0.5);
+}
+
+.arcade-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 #000, 0 3px 5px rgba(0,0,0,0.5);
+}
+
+.arcade-btn-pink {
+  background: linear-gradient(180deg, #ff4da6 0%, #d6006b 100%);
+  border-color: #ff99cc;
+  box-shadow: 0 5px 0 #800040, 0 0 15px rgba(255, 0, 127, 0.6);
+}
+.arcade-btn-pink:hover {
+  box-shadow: 0 5px 0 #800040, 0 0 25px rgba(255, 0, 127, 0.9);
+}
+
+.arcade-btn-cyan {
+  background: linear-gradient(180deg, #33f6ff 0%, #0099b8 100%);
+  border-color: #b3fcff;
+  color: #051622;
+  font-weight: bold;
+  box-shadow: 0 5px 0 #005566, 0 0 15px rgba(0, 243, 255, 0.6);
+}
+.arcade-btn-cyan:hover {
+  box-shadow: 0 5px 0 #005566, 0 0 25px rgba(0, 243, 255, 0.9);
+}
+
+.arcade-btn-green {
+  background: linear-gradient(180deg, #4dff88 0%, #00b33c 100%);
+  border-color: #b3ffcc;
+  color: #03200d;
+  font-weight: bold;
+  box-shadow: 0 5px 0 #006622, 0 0 15px rgba(77, 255, 136, 0.6);
+}
+.arcade-btn-green:hover {
+  box-shadow: 0 5px 0 #006622, 0 0 25px rgba(77, 255, 136, 0.9);
+}
+
+.arcade-btn-purple {
+  background: linear-gradient(180deg, #c766ff 0%, #8000cc 100%);
+  border-color: #e6b3ff;
+  box-shadow: 0 5px 0 #4d0080, 0 0 15px rgba(176, 38, 255, 0.6);
+}
+.arcade-btn-purple:hover {
+  box-shadow: 0 5px 0 #4d0080, 0 0 25px rgba(176, 38, 255, 0.9);
+}
+
+/* Floating Retro Scan Badge */
+.cyber-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.6rem;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  border-radius: 2px;
+  letter-spacing: 0.5px;
+}
+
+/* Avatar Frame Effect */
+.avatar-retro-frame {
+  position: relative;
+  padding: 6px;
+  background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple), var(--neon-cyan));
+  clip-path: polygon(
+    0 20px,
+    20px 0,
+    calc(100% - 20px) 0,
+    100% 20px,
+    100% calc(100% - 20px),
+    calc(100% - 20px) 100%,
+    20px 100%,
+    0 calc(100% - 20px)
+  );
+  box-shadow: 
+    0 0 25px rgba(255, 0, 127, 0.4),
+    0 0 45px rgba(0, 243, 255, 0.25);
+}
+
+.avatar-inner {
+  clip-path: polygon(
+    0 16px,
+    16px 0,
+    calc(100% - 16px) 0,
+    100% 16px,
+    100% calc(100% - 16px),
+    calc(100% - 16px) 100%,
+    16px 100%,
+    0 calc(100% - 16px)
+  );
+  position: relative;
+  background: #090214;
+}
+
+/* Retro Cartridge & Book Spine Details */
+.retro-cartridge-header {
+  height: 10px;
+  background: repeating-linear-gradient(
+    90deg,
+    #2a0845,
+    #2a0845 10px,
+    #150324 10px,
+    #150324 20px
+  );
+  border-bottom: 2px solid var(--neon-pink);
+}
+
+.book-spine-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.book-spine-effect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 14px;
+  background: linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(255,255,255,0.15) 50%, rgba(0,0,0,0.4) 100%);
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* Blinking Arcade Text Cursor */
+.arcade-blink {
+  animation: blinkCursor 0.8s infinite;
+}
+
+@keyframes blinkCursor {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+/* Pulse Glow Animation */
+.pulse-glow-pink {
+  animation: pulsePink 2s infinite ease-in-out;
+}
+
+@keyframes pulsePink {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(255, 0, 127, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(255, 0, 127, 0.8), 0 0 45px rgba(255, 0, 127, 0.4);
+  }
+}
+
+.pulse-glow-cyan {
+  animation: pulseCyan 2s infinite ease-in-out;
+}
+
+@keyframes pulseCyan {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(0, 243, 255, 0.8), 0 0 45px rgba(0, 243, 255, 0.4);
+  }
+}
+
+/* ADM Indicator Bar */
+.adm-banner {
+  background: linear-gradient(90deg, #ff007f, #b026ff, #00f3ff, #ff007f);
+  background-size: 300% 100%;
+  animation: gradientSlide 6s linear infinite;
+}
+
+@keyframes gradientSlide {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* Glitch Text Effect */
+.glitch-hover:hover {
+  animation: textGlitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes textGlitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+/* Floating Status HUD */
+.hud-box {
+  background: rgba(14, 4, 30, 0.9);
+  border: 1px solid rgba(0, 243, 255, 0.4);
+  box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+}
