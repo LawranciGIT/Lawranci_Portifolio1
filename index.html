@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RETRO.WAVE // 90s Synthwave Portfolio & Creative Showcase</title>
+  <meta name="description"
+    content="A striking 90s Synthwave & Retro Arcade portfolio showcasing official games, fangames, original sci-fi novels, and fanbooks with live interactive ADM controls." />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            neonPink: '#ff007f',
+            neonPinkGlow: '#ff3399',
+            neonCyan: '#00f3ff',
+            neonCyanGlow: '#38f8ff',
+            neonPurple: '#b026ff',
+            neonYellow: '#ffe600',
+            neonOrange: '#ff6000',
+            synthDark: '#08020f',
+            synthCard: 'rgba(18, 7, 36, 0.88)'
+          },
+          fontFamily: {
+            arcade: ['"Press Start 2P"', 'monospace'],
+            terminal: ['"VT323"', 'monospace'],
+            cyber: ['"Orbitron"', 'sans-serif'],
+            tech: ['"Rajdhani"', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Custom Retro Synthwave CSS -->
+  <link rel="stylesheet" href="css/retro-synthwave.css" />
+</head>
+
+<body
+  class="bg-[#08020f] text-gray-200 min-h-screen relative flex flex-col font-tech selection:bg-neonPink selection:text-white">
+
+  <!-- =========================================================================
+       ANIMATED SYNTHWAVE PERSPECTIVE GRID & RETRO SKYLINE BACKGROUND
+       ========================================================================= -->
+  <div class="synthwave-bg-container" aria-hidden="true">
+    <div class="synthwave-stars"></div>
+    <div class="synthwave-sun"></div>
+    <div class="synthwave-horizon"></div>
+    <div class="synthwave-grid-floor">
+      <div class="synthwave-grid-plane"></div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       CRT SCANLINE & CRT SCREEN SIMULATION OVERLAY
+       ========================================================================= -->
+  <div class="crt-overlay" id="crt-overlay" aria-hidden="true">
+    <div class="crt-scanlines"></div>
+    <div class="crt-beam"></div>
+    <div class="crt-vignette"></div>
+  </div>
+
+  <!-- Toast Notification Hub -->
+  <div id="toast-container"
+    class="fixed bottom-5 right-5 z-[9999] flex flex-col items-end max-w-sm w-full pointer-events-auto"></div>
+
+  <!-- =========================================================================
+       ADM SYSTEM OVERRIDE FLOATING RIBBON (VISIBLE WHEN LOGGED IN)
+       ========================================================================= -->
+  <div id="adm-status-ribbon"
+    class="hidden sticky top-0 z-50 w-full adm-banner text-black py-2 px-4 shadow-[0_0_25px_rgba(255,0,127,0.8)] border-b-2 border-white">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-2 font-arcade text-[11px] font-bold tracking-wider text-black">
+        <span class="inline-block w-2.5 h-2.5 rounded-full bg-black animate-ping"></span>
+        <span>⚡ ADM SYSTEM OVERRIDE ACTIVE // MASTER PRIVILEGES ENGAGED</span>
+      </div>
+      <div class="flex items-center gap-2 flex-wrap">
+        <button id="add-game-btn"
+          class="px-2.5 py-1 bg-black text-[#ff007f] hover:text-white hover:bg-neutral-900 border border-black font-arcade text-[9px] uppercase tracking-wider transition">
+          + ADD GAME
+        </button>
+        <button id="add-book-btn"
+          class="px-2.5 py-1 bg-black text-[#00f3ff] hover:text-white hover:bg-neutral-900 border border-black font-arcade text-[9px] uppercase tracking-wider transition">
+          + ADD BOOK
+        </button>
+        <button id="ribbon-edit-profile-btn"
+          class="px-2.5 py-1 bg-black text-yellow-300 hover:text-white hover:bg-neutral-900 border border-black font-arcade text-[9px] uppercase tracking-wider transition">
+          EDIT PROFILE
+        </button>
+        <button id="ribbon-backup-btn"
+          class="px-2.5 py-1 bg-black text-purple-300 hover:text-white hover:bg-neutral-900 border border-black font-arcade text-[9px] uppercase tracking-wider transition">
+          BACKUP / RESET
+        </button>
+        <button id="adm-logout-btn"
+          class="px-2.5 py-1 bg-red-700 text-white hover:bg-red-800 font-arcade text-[9px] uppercase tracking-wider transition">
+          LOGOUT
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       RETRO 90S HEADER & NAVIGATION BAR
+       ========================================================================= -->
+  <header
+    class="sticky top-0 z-40 bg-[#0d031c]/90 backdrop-blur-md border-b border-[#b026ff]/40 shadow-[0_4px_20px_rgba(0,0,0,0.7)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+
+      <!-- Logo Branding -->
+      <a href="#profile" class="flex items-center gap-3 group">
+        <div
+          class="w-10 h-10 border-2 border-neonPink flex items-center justify-center bg-black/60 shadow-[0_0_15px_rgba(255,0,127,0.6)] group-hover:shadow-[0_0_25px_rgba(0,243,255,0.8)] transition">
+          <span class="font-arcade text-neonCyan text-base">▶</span>
+        </div>
+        <div>
+          <div class="font-arcade text-sm md:text-base neon-text-pink tracking-widest flex items-center gap-1">
+            <span>RETRO.WAVE</span>
+            <span class="arcade-blink text-neonCyan">_</span>
+          </div>
+          <div class="font-terminal text-xs text-neonCyan tracking-widest -mt-0.5">
+            // CREATIVE PORTFOLIO 1999
+          </div>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden md:flex items-center gap-6 font-cyber text-sm tracking-widest">
+        <a href="#profile"
+          class="text-gray-300 hover:text-neonPink hover:drop-shadow-[0_0_8px_#ff007f] transition">PROFILE</a>
+        <a href="#games"
+          class="text-gray-300 hover:text-neonCyan hover:drop-shadow-[0_0_8px_#00f3ff] transition">GAMES</a>
+        <a href="#books"
+          class="text-gray-300 hover:text-neonPurple hover:drop-shadow-[0_0_8px_#b026ff] transition">BOOKS</a>
+        <a href="#contact"
+          class="text-gray-300 hover:text-neonYellow hover:drop-shadow-[0_0_8px_#ffe600] transition">CONTACT</a>
+      </nav>
+
+      <!-- Retro Controls & ADM Access Button -->
+      <div class="flex items-center gap-2 sm:gap-3">
+
+        <!-- Scanlines CRT Toggle -->
+        <button id="crt-toggle-btn"
+          class="px-2.5 py-1.5 border border-[#00f3ff]/60 bg-black/50 text-[#00f3ff] font-arcade text-[9px] hover:bg-[#00f3ff] hover:text-black transition shadow-[0_0_10px_rgba(0,243,255,0.3)]"
+          title="Toggle 90s CRT Scanlines">
+          📺 CRT [ON]
+        </button>
+
+        <!-- Sound FX Toggle -->
+        <button id="sound-toggle-btn"
+          class="px-2.5 py-1.5 border border-[#ff007f]/60 bg-black/50 text-gray-300 font-arcade text-[9px] hover:border-neonPink transition shadow-[0_0_10px_rgba(255,0,127,0.3)]"
+          title="Toggle 8-bit sound effects">
+          🔊 SOUND [ON]
+        </button>
+
+        <!-- Ambient Synthwave BGM Toggle -->
+        <button id="bgm-toggle-btn"
+          class="hidden sm:inline-block px-2.5 py-1.5 border border-[#b026ff]/60 bg-black/50 text-purple-300 font-arcade text-[9px] hover:border-purple-400 transition"
+          title="Play live synthesized chill synthwave chords">
+          🎵 BGM [START]
+        </button>
+
+        <!-- ADM Mode Login Button -->
+        <button id="adm-login-btn"
+          class="px-3 py-1.5 border border-[#ffe600] bg-[#ffe600]/10 text-yellow-300 font-arcade text-[9px] hover:bg-[#ffe600] hover:text-black transition shadow-[0_0_12px_rgba(255,230,0,0.4)]">
+          🔒 ADM LOGIN
+        </button>
+
+        <!-- Mobile Menu Trigger -->
+        <button id="mobile-menu-btn" class="md:hidden p-2 text-neonCyan hover:text-white"
+          aria-label="Toggle Navigation">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-nav-menu"
+      class="hidden md:hidden bg-[#0d031c] border-b border-[#b026ff] px-6 py-4 flex flex-col gap-4 font-cyber text-center">
+      <a href="#profile" class="text-neonPink text-sm tracking-wider py-1 border-b border-purple-900/50">PROFILE
+        DOSSIER</a>
+      <a href="#games" class="text-neonCyan text-sm tracking-wider py-1 border-b border-purple-900/50">GAMES VAULT</a>
+      <a href="#books" class="text-purple-300 text-sm tracking-wider py-1 border-b border-purple-900/50">BOOKS
+        ARCHIVE</a>
+      <a href="#contact" class="text-yellow-300 text-sm tracking-wider py-1">CONTACT CHANNELS</a>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       HERO & PROFILE SECTION (TOP OF PAGE)
+       ========================================================================= -->
+  <section id="profile" class="relative pt-12 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+
+    <!-- Top System Readout Bar -->
+    <div
+      class="mb-8 flex flex-wrap items-center justify-between gap-4 p-3 hud-box border border-[#00f3ff]/40 text-xs font-tech text-gray-300">
+      <div class="flex items-center gap-3">
+        <span class="w-3 h-3 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#34d399]"></span>
+        <span class="text-emerald-400 font-arcade text-[10px]">SYSTEM STATUS: NOMINAL</span>
+        <span class="text-purple-400">|</span>
+        <span class="text-cyan-300 font-tech">NODE: NEO-TOKYO.NET // PORT 1994</span>
+      </div>
+      <div class="flex items-center gap-4 text-[11px] font-arcade">
+        <span class="text-pink-400">FPS: 60</span>
+        <span class="text-yellow-400">CREDITS: 99</span>
+        <span class="text-cyan-400">SYS: 16-BIT ARCH</span>
+      </div>
+    </div>
+
+    <!-- Hero Card Grid -->
+    <div class="cyber-card p-6 sm:p-10 border-2 border-[#b026ff]/60 relative">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+
+        <!-- Left: Stylized Retro Avatar / Profile Frame -->
+        <div class="lg:col-span-5 flex flex-col items-center">
+          <div class="avatar-retro-frame w-64 h-64 sm:w-72 sm:h-72 relative">
+            <div class="avatar-inner w-full h-full overflow-hidden">
+              <img id="profile-avatar" src="assets/avatar.jpg" alt="Cyber Protagonist Avatar"
+                class="w-full h-full object-cover object-center filter contrast-110 saturate-125"
+                onerror="this.src='https://images.unsplash.com/photo-1578632767115-351597cf2477?w=500&auto=format&fit=crop&q=80'" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+
+              <!-- Floating Corner Reticles -->
+              <div class="absolute top-2 left-2 text-[10px] font-arcade text-neonCyan">◱ REC</div>
+              <div class="absolute top-2 right-2 text-[10px] font-arcade text-neonPink">LVL 99</div>
+              <div class="absolute bottom-2 left-2 text-[10px] font-arcade text-yellow-300">HP 100%</div>
+              <div class="absolute bottom-2 right-2 text-[10px] font-arcade text-neonCyan">SYNC 99%</div>
+            </div>
+          </div>
+
+          <!-- Avatar Badges -->
+          <div class="mt-4 flex flex-wrap justify-center gap-2">
+            <span
+              class="cyber-badge bg-black/80 border border-[#ff007f] text-[#ff007f] shadow-[0_0_10px_rgba(255,0,127,0.4)]">
+              ★ MASTER DECKER
+            </span>
+            <span
+              class="cyber-badge bg-black/80 border border-[#00f3ff] text-[#00f3ff] shadow-[0_0_10px_rgba(0,243,255,0.4)]">
+              ONLINE
+            </span>
+          </div>
+        </div>
+
+        <!-- Right: Personal Info Dossier -->
+        <div class="lg:col-span-7 space-y-6">
+
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-arcade text-xs text-neonPink tracking-widest uppercase">// PILOT DOSSIER</span>
+              <button id="profile-edit-btn"
+                class="hidden px-2.5 py-1 bg-yellow-400 text-black font-arcade text-[9px] hover:bg-white transition"
+                title="Edit Profile Details">
+                ✎ EDIT PROFILE (ADM)
+              </button>
+            </div>
+
+            <h1 id="profile-name"
+              class="font-cyber font-black text-3xl sm:text-5xl text-white neon-text-pink tracking-wide leading-tight">
+              Alex 'CyberViper' Sterling
+            </h1>
+
+            <div class="mt-2 flex flex-wrap items-center gap-3">
+              <span id="profile-nickname" class="font-arcade text-xs sm:text-sm text-neonCyan neon-text-cyan">
+                @CYBER_VIPER_94
+              </span>
+              <span class="text-purple-400">•</span>
+              <span id="profile-role"
+                class="font-tech text-base sm:text-lg text-purple-200 font-semibold tracking-wide">
+                Lead Game Architect & Sci-Fi Author
+              </span>
+            </div>
+          </div>
+
+          <!-- Personal Vitals Dossier Grid -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 py-3 border-y border-purple-800/50 font-tech">
+            <div class="bg-[#120626]/80 p-2.5 border border-purple-700/40">
+              <div class="text-[10px] font-arcade text-gray-400 uppercase">AGE</div>
+              <div id="profile-age" class="text-lg font-bold text-neonCyan font-cyber">26 YRS</div>
+            </div>
+            <div class="bg-[#120626]/80 p-2.5 border border-purple-700/40">
+              <div class="text-[10px] font-arcade text-gray-400 uppercase">NATIONALITY</div>
+              <div id="profile-nationality" class="text-sm font-bold text-pink-300 truncate font-cyber">Neo-Tokyo /
+                Brazil</div>
+            </div>
+            <div class="bg-[#120626]/80 p-2.5 border border-purple-700/40">
+              <div class="text-[10px] font-arcade text-gray-400 uppercase">HP POOL</div>
+              <div id="profile-hp" class="text-sm font-bold text-emerald-400 font-cyber">100 / 100</div>
+            </div>
+            <div class="bg-[#120626]/80 p-2.5 border border-purple-700/40">
+              <div class="text-[10px] font-arcade text-gray-400 uppercase">HIGH SCORE</div>
+              <div id="profile-score" class="text-sm font-bold text-yellow-300 font-cyber">994,200</div>
+            </div>
+          </div>
+
+          <!-- Bio Description -->
+          <p id="profile-bio" class="font-tech text-base sm:text-lg text-gray-300 leading-relaxed">
+            Forging 16-bit retro-futuristic virtual worlds and neon-soaked cyberpunk sagas. Living at the intersection
+            of 90s arcade nostalgia, synthesized frequencies, and next-gen interactive fiction.
+          </p>
+
+          <!-- Action Buttons -->
+          <div class="flex flex-wrap gap-4 pt-2">
+            <a href="#games" class="cyber-btn text-xs inline-flex items-center gap-2">
+              <span>EXPLORE GAMES</span>
+              <span>▼</span>
+            </a>
+            <a href="#books" class="cyber-btn cyber-btn-cyan text-xs inline-flex items-center gap-2">
+              <span>READ NOVELS</span>
+              <span>▼</span>
+            </a>
+            <a href="#contact"
+              class="cyber-btn text-xs border-yellow-400 text-yellow-300 hover:bg-yellow-400 hover:text-black inline-flex items-center gap-2">
+              <span>CONTACT TRANSMISSION</span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 1: GAMES SHOWCASE (SEARCH & FILTERABLE)
+       ========================================================================= -->
+  <section id="games"
+    class="relative py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full border-t border-purple-900/60">
+
+    <!-- Section Marquee Header -->
+    <div class="mb-10 text-center">
+      <h2 class="font-cyber font-black text-3xl sm:text-5xl text-white neon-text-pink tracking-wider">
+        GAMES VAULT
+      </h2>
+      <p class="mt-2 text-gray-400 font-tech text-base sm:text-lg max-w-2xl mx-auto">
+        Search and filter through commercial official releases and fangame tributes.
+      </p>
+    </div>
+
+    <!-- Search Bar & Category Sub-Filters Toolbar -->
+    <div class="cyber-card p-5 mb-10 border border-[#ff007f]/40">
+      <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
+
+        <!-- Search Input -->
+        <div class="relative flex-1">
+          <span
+            class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-neonPink text-sm font-arcade">
+            🔍
+          </span>
+          <input type="text" id="games-search-input" placeholder="Search games by title, platform, genre, tags..."
+            class="w-full pl-10 pr-10 py-3 bg-[#0a0218] border border-purple-700/60 text-white placeholder-gray-500 font-tech text-base focus:outline-none focus:border-neonPink focus:ring-1 focus:ring-neonPink shadow-inner" />
+          <button id="games-search-clear"
+            class="hidden absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-white font-arcade text-sm"
+            title="Clear search">
+            &times;
+          </button>
+        </div>
+
+        <!-- Sub-Category Filter Tabs -->
+        <div class="flex items-center gap-1.5 flex-wrap">
+          <button data-filter="all"
+            class="game-filter-tab px-3.5 py-2.5 font-arcade text-[10px] tracking-wider uppercase border border-[#ff007f] transition cursor-pointer">
+            ALL GAMES
+          </button>
+          <button data-filter="official"
+            class="game-filter-tab px-3.5 py-2.5 font-arcade text-[10px] tracking-wider uppercase border border-[#ff007f] transition cursor-pointer">
+            OFFICIAL GAMES
+          </button>
+          <button data-filter="fangame"
+            class="game-filter-tab px-3.5 py-2.5 font-arcade text-[10px] tracking-wider uppercase border border-[#ff007f] transition cursor-pointer">
+            FANGAMES
+          </button>
+        </div>
+
+        <!-- Games Count Badge -->
+        <div class="hidden sm:flex items-center">
+          <span id="games-count-badge"
+            class="px-3 py-2 bg-purple-950 border border-purple-600 text-neonCyan font-arcade text-[10px]">
+            4 GAMES
+          </span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Games Dynamic Grid -->
+    <div id="games-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+      <!-- Injected dynamically by app.js -->
+    </div>
+
+  </section>
+
+  <!-- =========================================================================
+       SECTION 2: BOOKS SHOWCASE (SEARCH & FILTERABLE)
+       ========================================================================= -->
+  <section id="books"
+    class="relative py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full border-t border-purple-900/60">
+
+    <!-- Section Marquee Header -->
+    <div class="mb-10 text-center">
+      <h2 class="font-cyber font-black text-3xl sm:text-5xl text-white neon-text-cyan tracking-wider">
+        ARCHIVES // BOOKS
+      </h2>
+      <p class="mt-2 text-gray-400 font-tech text-base sm:text-lg max-w-2xl mx-auto">
+        Explore original speculative novels and commemorative fanbooks & retrospectives.
+      </p>
+    </div>
+
+    <!-- Search Bar & Category Sub-Filters Toolbar -->
+    <div class="cyber-card p-5 mb-10 border border-[#00f3ff]/40">
+      <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
+
+        <!-- Search Input -->
+        <div class="relative flex-1">
+          <span
+            class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-neonCyan text-sm font-arcade">
+            🔍
+          </span>
+          <input type="text" id="books-search-input" placeholder="Search books by title, author, synopsis, genre..."
+            class="w-full pl-10 pr-10 py-3 bg-[#0a0218] border border-cyan-800/60 text-white placeholder-gray-500 font-tech text-base focus:outline-none focus:border-neonCyan focus:ring-1 focus:ring-neonCyan shadow-inner" />
+          <button id="books-search-clear"
+            class="hidden absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-white font-arcade text-sm"
+            title="Clear search">
+            &times;
+          </button>
+        </div>
+
+        <!-- Sub-Category Filter Tabs -->
+        <div class="flex items-center gap-1.5 flex-wrap">
+          <button data-filter="all"
+            class="book-filter-tab px-3.5 py-2.5 font-arcade text-[10px] tracking-wider uppercase border border-[#00f3ff] transition cursor-pointer">
+            ALL BOOKS
+          </button>
+          <button data-filter="original"
+            class="book-filter-tab px-3.5 py-2.5 font-arcade text-[10px] tracking-wider uppercase border border-[#00f3ff] transition cursor-pointer">
+            ORIGINAL BOOKS
+          </button>
+          <button data-filter="fanbook"
+            class="book-filter-tab px-3.5 py-2.5 font-arcade text-[10px] tracking-wider uppercase border border-[#00f3ff] transition cursor-pointer">
+            FANBOOKS
+          </button>
+        </div>
+
+        <!-- Books Count Badge -->
+        <div class="hidden sm:flex items-center">
+          <span id="books-count-badge"
+            class="px-3 py-2 bg-cyan-950 border border-cyan-600 text-neonPink font-arcade text-[10px]">
+            4 BOOKS
+          </span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Books Dynamic Grid -->
+    <div id="books-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+      <!-- Injected dynamically by app.js -->
+    </div>
+
+  </section>
+
+  <!-- =========================================================================
+       SECTION 4: FOOTER & CONTACT LINKS (BOTTOM OF PAGE)
+       ========================================================================= -->
+  <footer id="contact"
+    class="mt-auto relative bg-[#090214] border-t-2 border-[#ff007f] pt-16 pb-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+
+      <!-- Top Arcade Marquee -->
+      <div class="text-center mb-12">
+        <div class="font-arcade text-xs sm:text-sm text-yellow-300 tracking-widest uppercase mb-2 animate-pulse">
+          ★ HIGH SCORE: 999,990 ★
+        </div>
+        <h3 class="font-cyber font-black text-2xl sm:text-4xl text-white neon-text-pink mb-4">
+          CONNECT TO THE MAINFRAME
+        </h3>
+        <p class="font-tech text-gray-300 max-w-xl mx-auto text-base">
+          Direct transmissions, community hubs, and developer channels. Click any arcade button to establish connection.
+        </p>
+      </div>
+
+      <!-- Glowing Arcade Button Contact Links Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+
+        <!-- YouTube Channel -->
+        <a href="https://youtube.com/@synthwave_creator" target="_blank" rel="noopener noreferrer"
+          class="arcade-btn arcade-btn-pink w-full flex items-center justify-center gap-3 py-4 text-xs font-arcade tracking-wider group">
+          <span class="text-base">📺</span>
+          <span>YOUTUBE CHANNEL</span>
+        </a>
+
+        <!-- Discord Server -->
+        <a href="https://discord.gg/synthwave-haven" target="_blank" rel="noopener noreferrer"
+          class="arcade-btn arcade-btn-purple w-full flex items-center justify-center gap-3 py-4 text-xs font-arcade tracking-wider group">
+          <span class="text-base">💬</span>
+          <span>DISCORD SERVER</span>
+        </a>
+
+        <!-- WhatsApp Direct Chat -->
+        <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer"
+          class="arcade-btn arcade-btn-green w-full flex items-center justify-center gap-3 py-4 text-xs font-arcade tracking-wider group">
+          <span class="text-base">📱</span>
+          <span>WHATSAPP CHAT</span>
+        </a>
+
+        <!-- Direct Email -->
+        <a href="mailto:alex.sterling.synthwave@gmail.com"
+          class="arcade-btn arcade-btn-cyan w-full flex items-center justify-center gap-3 py-4 text-xs font-arcade tracking-wider group">
+          <span class="text-base">✉️</span>
+          <span>DIRECT EMAIL</span>
+        </a>
+
+      </div>
+
+      <!-- Quick Message Terminal Box -->
+      <div class="cyber-card p-6 max-w-3xl mx-auto mb-16 border border-purple-600/50">
+        <div class="flex items-center justify-between border-b border-purple-800/60 pb-3 mb-4">
+          <div class="font-arcade text-xs text-neonCyan flex items-center gap-2">
+            <span>TERMINAL TRANSMISSION: /dev/null</span>
+          </div>
+          <span class="text-[10px] font-arcade text-gray-400">ENCRYPTION: 128-BIT</span>
+        </div>
+        <form id="quick-contact-form" class="space-y-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <input type="text" placeholder="YOUR CALLSIGN / NAME" required
+              class="w-full p-2.5 bg-[#070114] border border-purple-700/60 text-white placeholder-gray-500 font-tech text-sm focus:border-neonPink focus:outline-none" />
+            <input type="email" placeholder="YOUR FREQUENCY / EMAIL" required
+              class="w-full p-2.5 bg-[#070114] border border-purple-700/60 text-white placeholder-gray-500 font-tech text-sm focus:border-neonPink focus:outline-none" />
+          </div>
+          <textarea rows="3" placeholder="TRANSMIT YOUR MESSAGE OR COLLABORATION PROPOSAL..." required
+            class="w-full p-2.5 bg-[#070114] border border-purple-700/60 text-white placeholder-gray-500 font-tech text-sm focus:border-neonPink focus:outline-none"></textarea>
+          <button type="submit" class="cyber-btn cyber-btn-cyan w-full text-xs">
+            SEND TRANSMISSION ▶
+          </button>
+        </form>
+      </div>
+
+      <!-- Copyright & 90s Arcade Aesthetic Footer Note -->
+      <div
+        class="pt-8 border-t border-purple-900/60 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-tech text-gray-400 text-center md:text-left">
+        <div>
+          <div class="font-arcade text-[10px] text-pink-400 mb-1">
+            © 1994-2026 // RETRO.WAVE STUDIO // ALL RIGHTS RESERVED
+          </div>
+          <div>CRAFTED WITH 16-BIT PASSION, SYNTHESIZERS, AND HIGH VOLTAGE PIXELS.</div>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <span class="font-arcade text-[9px] text-yellow-300 animate-pulse">
+            INSERT COIN TO CONTINUE [99]
+          </span>
+          <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+            class="font-arcade text-[9px] text-neonCyan hover:underline">
+            ▲ TOP
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       MODALS
+       ========================================================================= -->
+
+  <!-- 1. ADM LOGIN MODAL -->
+  <div id="adm-modal"
+    class="cyber-modal hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
+    <div class="cyber-card max-w-md w-full p-6 sm:p-8 border-2 border-[#ffe600] shadow-[0_0_35px_rgba(255,230,0,0.5)]">
+
+      <div class="flex items-center justify-between border-b border-yellow-500/40 pb-3 mb-6">
+        <h3 class="font-arcade text-xs sm:text-sm text-yellow-300 flex items-center gap-2">
+          <span>⚡</span>
+          <span>MASTER ADM ACCESS</span>
+        </h3>
+        <button class="modal-close-btn text-gray-400 hover:text-white font-arcade text-base">&times;</button>
+      </div>
+
+      <p class="font-tech text-gray-300 text-sm mb-4">
+        Enter the Master Passcode to unlock real-time administrative edit privileges for all games, books, and profile
+        info.
+      </p>
+
+      <form id="adm-pin-form" class="space-y-4">
+        <div>
+          <input type="password" id="adm-pin-input" placeholder="ENTER PASSCODE..."
+            class="w-full text-center tracking-widest text-lg py-3 bg-[#080114] border-2 border-yellow-400 text-yellow-300 font-arcade focus:outline-none focus:shadow-[0_0_15px_rgba(255,230,0,0.6)]"
+            autocomplete="current-password" />
+          <div id="adm-pin-error" class="hidden text-red-400 font-arcade text-[10px] mt-2 text-center"></div>
+        </div>
+
+        <!-- Retro Digital Keypad -->
+        <div class="grid grid-cols-3 gap-2 pt-2">
+          <button type="button" data-key="1"
+            class="keypad-btn p-3 bg-purple-950/80 border border-purple-600 text-white font-arcade text-xs hover:bg-yellow-400 hover:text-black">1</button>
+          <button type="button" data-key="2"
+            class="keypad-btn p-3 bg-purple-950/80 border border-purple-600 text-white font-arcade text-xs hover:bg-yellow-400 hover:text-black">2</button>
+          <button type="button" data-key="3"
+            class="keypad-btn p-3 bg-purple-950/80 border border-purple-600 text-white font-arcade text-xs hover:bg-yellow-400 hover:text-black">3</button>
+          <button type="button" data-key="4"
+            class="keypad-btn p-3 bg-purple-950/80 border border-purple-600 text-white font-arcade text-xs hover:bg-yellow-400 hover:text-black">4</button>
+          <button type="button" data-key="5"
+            class="keypad-btn p-3 bg-purple-950/80 border border-purple-600 text-white font-arcade text-xs hover:bg-yellow-400 hover:text-black">5</button>
+          <button type="button" data-key="6"
+            class="keypad-btn p-3 bg-purple-950/80 border border-purple-600 text-white font-arcade text-xs hover:bg-yellow-400 hover:text-black">6</button>
+          <button type="button" data-key="7"
+            class="keypad-btn p-3 bg-purple-950/80 border border-purple-600 text-white font-arcade text-xs hover:bg-yellow-400 hover:text-black">7</button>
+          <button type="button" data-key="8"
+            class="keypad-btn p-3 bg-purple-950/80 border border-purple-600 text-white font-arcade text-xs hover:bg-yellow-400 hover:text-black">8</button>
+          <button type="button" data-key="9"
+            class="keypad-btn p-3 bg-purple-950/80 border border-purple-600 text-white font-arcade text-xs hover:bg-yellow-400 hover:text-black">9</button>
+          <button type="button" data-key="clear"
+            class="keypad-btn p-3 bg-red-950/80 border border-red-700 text-red-300 font-arcade text-[10px] hover:bg-red-700 hover:text-white">CLR</button>
+          <button type="button" data-key="0"
+            class="keypad-btn p-3 bg-purple-950/80 border border-purple-600 text-white font-arcade text-xs hover:bg-yellow-400 hover:text-black">0</button>
+          <button type="button" data-key="backspace"
+            class="keypad-btn p-3 bg-blue-950/80 border border-blue-700 text-blue-300 font-arcade text-[10px] hover:bg-blue-700 hover:text-white">⌫</button>
+        </div>
+
+        <div class="text-[10px] font-arcade text-gray-400 text-center pt-2">
+          [DEFAULT PIN: <span class="text-yellow-300 font-bold">1984</span> OR <span
+            class="text-yellow-300 font-bold">admin</span>]
+        </div>
+
+        <button type="submit"
+          class="cyber-btn w-full text-xs border-yellow-400 text-yellow-300 hover:bg-yellow-400 hover:text-black mt-2">
+          AUTHENTICATE ADM ▶
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. UNIVERSAL ITEM EDITOR MODAL (GAME / BOOK) -->
+  <div id="item-modal"
+    class="cyber-modal hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md overflow-y-auto">
+    <div
+      class="cyber-card max-w-2xl w-full p-6 sm:p-8 border-2 border-neonPink shadow-[0_0_35px_rgba(255,0,127,0.5)] my-8">
+
+      <div class="flex items-center justify-between border-b border-pink-500/40 pb-3 mb-6">
+        <h3 id="item-modal-title" class="font-arcade text-xs sm:text-sm text-neonPink flex items-center gap-2">
+          EDIT ITEM DETAILS
+        </h3>
+        <button class="modal-close-btn text-gray-400 hover:text-white font-arcade text-base">&times;</button>
+      </div>
+
+      <form id="item-editor-form" class="space-y-4">
+        <input type="hidden" id="item-id" />
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- Title -->
+          <div class="sm:col-span-2">
+            <label class="block font-arcade text-[10px] text-gray-300 mb-1">TITLE:</label>
+            <input type="text" id="item-title" required
+              class="w-full p-2.5 bg-[#0a0218] border border-purple-600 text-white font-tech focus:border-neonPink focus:outline-none" />
+          </div>
+
+          <!-- Category -->
+          <div>
+            <label class="block font-arcade text-[10px] text-gray-300 mb-1">CATEGORY:</label>
+            <select id="item-category"
+              class="w-full p-2.5 bg-[#0a0218] border border-purple-600 text-white font-tech focus:border-neonPink focus:outline-none">
+              <!-- Filled dynamically based on type -->
+            </select>
+          </div>
+
+          <!-- Year -->
+          <div>
+            <label class="block font-arcade text-[10px] text-gray-300 mb-1">YEAR / RELEASE DATE:</label>
+            <input type="text" id="item-year" placeholder="e.g. 1996 / Remastered"
+              class="w-full p-2.5 bg-[#0a0218] border border-purple-600 text-white font-tech focus:border-neonPink focus:outline-none" />
+          </div>
+
+          <!-- Platform / Pages -->
+          <div id="item-platform-row">
+            <label id="item-platform-label" class="block font-arcade text-[10px] text-gray-300 mb-1">PLATFORM /
+              SPECS:</label>
+            <input type="text" id="item-platform"
+              class="w-full p-2.5 bg-[#0a0218] border border-purple-600 text-white font-tech focus:border-neonPink focus:outline-none" />
+          </div>
+
+          <!-- Tags -->
+          <div>
+            <label class="block font-arcade text-[10px] text-gray-300 mb-1">TAGS (COMMA SEPARATED):</label>
+            <input type="text" id="item-tags" placeholder="Retro, Synthwave, 16-Bit"
+              class="w-full p-2.5 bg-[#0a0218] border border-purple-600 text-white font-tech focus:border-neonPink focus:outline-none" />
+          </div>
+        </div>
+
+        <!-- Cover Image URL & File Upload -->
+        <div>
+          <label class="block font-arcade text-[10px] text-gray-300 mb-1">COVER IMAGE (URL OR UPLOAD LOCAL
+            FILE):</label>
+          <div class="flex gap-2 mb-2">
+            <input type="text" id="item-cover-url" placeholder="assets/game_racer.jpg or https://..."
+              class="flex-1 p-2 bg-[#0a0218] border border-purple-600 text-white font-tech text-sm focus:border-neonPink focus:outline-none" />
+            <label
+              class="px-3 py-2 bg-purple-900 border border-purple-500 text-cyan-300 font-arcade text-[9px] cursor-pointer hover:bg-purple-800 flex items-center">
+              📁 UPLOAD
+              <input type="file" id="item-cover-file" accept="image/*" class="hidden" />
+            </label>
+          </div>
+
+          <!-- Live Image & Title Preview -->
+          <div class="flex items-center gap-4 p-3 bg-purple-950/40 border border-purple-800">
+            <img id="item-preview-img" src="assets/game_racer.jpg" alt="Preview"
+              class="w-16 h-20 object-cover border border-neonPink" />
+            <div>
+              <div class="text-[10px] font-arcade text-gray-400">LIVE PREVIEW:</div>
+              <div id="item-preview-title" class="font-cyber font-bold text-white text-sm">Preview Title</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- External Link -->
+        <div>
+          <label id="item-link-label" class="block font-arcade text-[10px] text-gray-300 mb-1">EXTERNAL STORE / READ
+            LINK:</label>
+          <input type="url" id="item-link" placeholder="https://..."
+            class="w-full p-2.5 bg-[#0a0218] border border-purple-600 text-white font-tech text-sm focus:border-neonPink focus:outline-none" />
+        </div>
+
+        <!-- Description / Summary -->
+        <div>
+          <label class="block font-arcade text-[10px] text-gray-300 mb-1">ABOUT / SYNOPSIS DESCRIPTION:</label>
+          <textarea id="item-description" rows="4" required
+            class="w-full p-2.5 bg-[#0a0218] border border-purple-600 text-white font-tech text-sm focus:border-neonPink focus:outline-none"></textarea>
+        </div>
+
+        <div class="flex justify-end gap-3 pt-3">
+          <button type="button" class="modal-close-btn cyber-btn cyber-btn-cyan text-xs">
+            CANCEL
+          </button>
+          <button type="submit" class="cyber-btn text-xs">
+            💾 SAVE ITEM DETAILS
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <!-- 3. PROFILE EDITOR MODAL (ADM) -->
+  <div id="profile-modal"
+    class="cyber-modal hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md overflow-y-auto">
+    <div
+      class="cyber-card max-w-xl w-full p-6 sm:p-8 border-2 border-[#00f3ff] shadow-[0_0_35px_rgba(0,243,255,0.5)] my-8">
+
+      <div class="flex items-center justify-between border-b border-cyan-500/40 pb-3 mb-6">
+        <h3 class="font-arcade text-xs sm:text-sm text-neonCyan flex items-center gap-2">
+          <span>✎</span>
+          <span>EDIT ADM DOSSIER / PROFILE</span>
+        </h3>
+        <button class="modal-close-btn text-gray-400 hover:text-white font-arcade text-base">&times;</button>
+      </div>
+
+      <form id="profile-editor-form" class="space-y-4">
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block font-arcade text-[10px] text-gray-300 mb-1">NAME:</label>
+            <input type="text" id="edit-profile-name" required
+              class="w-full p-2.5 bg-[#0a0218] border border-cyan-700 text-white font-tech focus:border-neonCyan focus:outline-none" />
+          </div>
+          <div>
+            <label class="block font-arcade text-[10px] text-gray-300 mb-1">NICKNAME / HANDLE:</label>
+            <input type="text" id="edit-profile-nickname" required
+              class="w-full p-2.5 bg-[#0a0218] border border-cyan-700 text-white font-tech focus:border-neonCyan focus:outline-none" />
+          </div>
+          <div>
+            <label class="block font-arcade text-[10px] text-gray-300 mb-1">AGE:</label>
+            <input type="text" id="edit-profile-age" required
+              class="w-full p-2.5 bg-[#0a0218] border border-cyan-700 text-white font-tech focus:border-neonCyan focus:outline-none" />
+          </div>
+          <div>
+            <label class="block font-arcade text-[10px] text-gray-300 mb-1">NATIONALITY:</label>
+            <input type="text" id="edit-profile-nationality" required
+              class="w-full p-2.5 bg-[#0a0218] border border-cyan-700 text-white font-tech focus:border-neonCyan focus:outline-none" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-arcade text-[10px] text-gray-300 mb-1">TITLE / SPECIALIZATION:</label>
+          <input type="text" id="edit-profile-role" required
+            class="w-full p-2.5 bg-[#0a0218] border border-cyan-700 text-white font-tech focus:border-neonCyan focus:outline-none" />
+        </div>
+
+        <div>
+          <label class="block font-arcade text-[10px] text-gray-300 mb-1">AVATAR IMAGE (URL OR UPLOAD):</label>
+          <div class="flex gap-2 mb-2">
+            <input type="text" id="edit-profile-avatar-url"
+              class="flex-1 p-2 bg-[#0a0218] border border-cyan-700 text-white font-tech text-sm focus:border-neonCyan focus:outline-none" />
+            <label
+              class="px-3 py-2 bg-cyan-900 border border-cyan-500 text-white font-arcade text-[9px] cursor-pointer hover:bg-cyan-800 flex items-center">
+              📁 UPLOAD
+              <input type="file" id="edit-profile-avatar-file" accept="image/*" class="hidden" />
+            </label>
+          </div>
+          <div class="flex items-center gap-3 p-2 bg-cyan-950/40 border border-cyan-800">
+            <img id="edit-profile-preview-avatar" src="assets/avatar.jpg" alt="Avatar preview"
+              class="w-12 h-12 object-cover border border-neonCyan" />
+            <span class="text-xs text-gray-400 font-tech">Avatar Real-Time Preview</span>
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-arcade text-[10px] text-gray-300 mb-1">MISSION STATEMENT / BIO:</label>
+          <textarea id="edit-profile-bio" rows="3" required
+            class="w-full p-2.5 bg-[#0a0218] border border-cyan-700 text-white font-tech text-sm focus:border-neonCyan focus:outline-none"></textarea>
+        </div>
+
+        <div class="flex justify-end gap-3 pt-3">
+          <button type="button" class="modal-close-btn cyber-btn text-xs">
+            CANCEL
+          </button>
+          <button type="submit" class="cyber-btn cyber-btn-cyan text-xs">
+            💾 UPDATE PROFILE
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <!-- 4. ITEM DETAILS MODAL (GAME / BOOK PREVIEW) -->
+  <div id="details-modal"
+    class="cyber-modal hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md overflow-y-auto">
+    <div
+      class="cyber-card max-w-3xl w-full p-6 sm:p-10 border-2 border-purple-500 shadow-[0_0_40px_rgba(176,38,255,0.6)] my-8">
+      <div id="details-modal-content">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. BACKUP & FACTORY RESET MODAL -->
+  <div id="backup-modal"
+    class="cyber-modal hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
+    <div
+      class="cyber-card max-w-xl w-full p-6 sm:p-8 border-2 border-purple-400 shadow-[0_0_35px_rgba(176,38,255,0.5)]">
+
+      <div class="flex items-center justify-between border-b border-purple-500/40 pb-3 mb-6">
+        <h3 class="font-arcade text-xs sm:text-sm text-purple-300 flex items-center gap-2">
+          <span>💾</span>
+          <span>DATABASE BACKUP & RESTORE</span>
+        </h3>
+        <button class="modal-close-btn text-gray-400 hover:text-white font-arcade text-base">&times;</button>
+      </div>
+
+      <p class="font-tech text-gray-300 text-sm mb-3">
+        Copy your portfolio database JSON to create an offline backup, paste JSON to restore, or reset to original 90s
+        sample dataset.
+      </p>
+
+      <textarea id="backup-json-output" rows="6"
+        class="w-full p-3 bg-black border border-purple-600 font-mono text-xs text-green-400 mb-4 focus:outline-none"></textarea>
+
+      <div class="flex flex-wrap gap-2 justify-between">
+        <div class="flex gap-2">
+          <button id="copy-backup-btn" class="cyber-btn cyber-btn-cyan text-[10px]">
+            COPY JSON
+          </button>
+          <button id="import-backup-btn" class="cyber-btn text-[10px]">
+            IMPORT JSON
+          </button>
+        </div>
+        <button id="reset-factory-btn"
+          class="px-3 py-2 bg-red-900 border border-red-500 text-white font-arcade text-[9px] hover:bg-red-700 transition">
+          ⚠️ RESET FACTORY DEFAULTS
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Application Scripts -->
+  <script src="js/audio.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>
