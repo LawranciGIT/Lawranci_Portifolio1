@@ -125,6 +125,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (profileMp) profileMp.textContent = profile.mp || '96 / 100';
     if (profileScore) profileScore.textContent = profile.score || '994,200';
 
+    if (profile.contact) {
+      const yt = document.getElementById('contact-link-youtube');
+      if (yt && profile.contact.youtube) yt.href = profile.contact.youtube;
+      const dc = document.getElementById('contact-link-discord');
+      if (dc && profile.contact.discord) dc.href = profile.contact.discord;
+      const wa = document.getElementById('contact-link-whatsapp');
+      if (wa && profile.contact.whatsapp) wa.href = profile.contact.whatsapp;
+      const em = document.getElementById('contact-link-email');
+      if (em && profile.contact.email) em.href = profile.contact.email;
+    }
+
     if (profileEditBtn) {
       if (state.isAdmin) {
         profileEditBtn.classList.remove('hidden');
@@ -192,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const badgeColor = isOfficial ? 'bg-[#ff007f]/20 border-[#ff007f] text-[#ff007f]' : 'bg-[#00f3ff]/20 border-[#00f3ff] text-[#00f3ff]';
       const categoryTag = isOfficial ? 'OFFICIAL RELEASE' : 'FANGAME TRIBUTE';
 
-      const tagsHtml = (game.tags || []).map(t => 
+      const tagsHtml = (game.tags || []).map(t =>
         `<span class="text-[10px] uppercase font-tech px-2 py-0.5 bg-[#1b0a33] text-cyan-300 border border-cyan-800/60 rounded">${t}</span>`
       ).join(' ');
 
@@ -388,7 +399,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const badgeColor = isOriginal ? 'bg-[#ff007f]/20 border-[#ff007f] text-[#ff007f]' : 'bg-[#ffe600]/20 border-[#ffe600] text-[#ffe600]';
       const categoryTag = isOriginal ? 'ORIGINAL NOVEL' : 'FANBOOK SAGA';
 
-      const tagsHtml = (book.tags || []).map(t => 
+      const tagsHtml = (book.tags || []).map(t =>
         `<span class="text-[10px] uppercase font-tech px-2 py-0.5 bg-[#10072b] text-purple-300 border border-purple-800/60 rounded">${t}</span>`
       ).join(' ');
 
@@ -699,7 +710,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const val = pinInput.value.trim().toLowerCase();
 
       // Master code accepts "1984" or "admin" or "synth"
-      if (val === '1984' || val === 'admin' || val === 'synth') {
+      if (val === '198418711822' || val === 'admin' || val === 'synth') {
         state.isAdmin = true;
         sessionStorage.setItem('synthwave_adm_active', 'true');
         admModal.classList.add('hidden');
@@ -832,7 +843,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const file = e.target.files[0];
       if (file) {
         const reader = new FileReader();
-        reader.onload = function(event) {
+        reader.onload = function (event) {
           document.getElementById('item-cover-url').value = event.target.result;
           updateItemEditorPreview();
           showToast('IMAGE LOADED', 'Cover image converted to local memory.', 'cyan');
@@ -962,7 +973,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const file = e.target.files[0];
       if (file) {
         const reader = new FileReader();
-        reader.onload = function(event) {
+        reader.onload = function (event) {
           document.getElementById('edit-profile-avatar-url').value = event.target.result;
           document.getElementById('edit-profile-preview-avatar').src = event.target.result;
           showToast('AVATAR READY', 'Avatar converted to local memory.', 'pink');
@@ -1280,17 +1291,6 @@ document.addEventListener('DOMContentLoaded', () => {
       link.addEventListener('click', () => {
         mobileNavMenu.classList.add('hidden');
       });
-    });
-  }
-
-  // Quick Contact Terminal form
-  const contactForm = document.getElementById('quick-contact-form');
-  if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      window.retroAudio.playCoin();
-      showToast('TRANSMISSION SENT', 'Your message has been beamed to the creator!', 'green');
-      contactForm.reset();
     });
   }
 
