@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RETRO.WAVE // 90s Synthwave Portfolio & Creative Showcase</title>
+  <title>Lawranci Portifolio</title>
   <meta name="description"
     content="A striking 90s Synthwave & Retro Arcade portfolio showcasing official games, fangames, original sci-fi novels, and fanbooks with live interactive ADM controls." />
 
@@ -221,14 +221,14 @@
         <div class="lg:col-span-5 flex flex-col items-center">
           <div class="avatar-retro-frame w-64 h-64 sm:w-72 sm:h-72 relative">
             <div class="avatar-inner w-full h-full overflow-hidden">
-              <img id="profile-avatar" src="assets/avatar.jpg" alt="Cyber Protagonist Avatar"
+              <img id="profile-avatar" src="assets/avatar2.png" alt="Cyber Protagonist Avatar"
                 class="w-full h-full object-cover object-center filter contrast-110 saturate-125"
-                onerror="this.src='https://images.unsplash.com/photo-1578632767115-351597cf2477?w=500&auto=format&fit=crop&q=80'" />
+                onerror="this.src='assets/avatar.jpg'" />
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
 
               <!-- Floating Corner Reticles -->
               <div class="absolute top-2 left-2 text-[10px] font-arcade text-neonCyan">◱ REC</div>
-              <div class="absolute top-2 right-2 text-[10px] font-arcade text-neonPink">LVL 99</div>
+              <div id="profile-level" class="absolute top-2 right-2 text-[10px] font-arcade text-neonPink">LVL 20</div>
               <div class="absolute bottom-2 left-2 text-[10px] font-arcade text-yellow-300">HP 100%</div>
               <div class="absolute bottom-2 right-2 text-[10px] font-arcade text-neonCyan">SYNC 99%</div>
             </div>
@@ -236,9 +236,9 @@
 
           <!-- Avatar Badges -->
           <div class="mt-4 flex flex-wrap justify-center gap-2">
-            <span
+            <span id="profile-special-class"
               class="cyber-badge bg-black/80 border border-[#ff007f] text-[#ff007f] shadow-[0_0_10px_rgba(255,0,127,0.4)]">
-              ★ MASTER DECKER
+              ★ Magician
             </span>
             <span
               class="cyber-badge bg-black/80 border border-[#00f3ff] text-[#00f3ff] shadow-[0_0_10px_rgba(0,243,255,0.4)]">
@@ -262,17 +262,17 @@
 
             <h1 id="profile-name"
               class="font-cyber font-black text-3xl sm:text-5xl text-white neon-text-pink tracking-wide leading-tight">
-              Alex 'CyberViper' Sterling
+              Lorenzzo Austriquinio Accioly
             </h1>
 
             <div class="mt-2 flex flex-wrap items-center gap-3">
               <span id="profile-nickname" class="font-arcade text-xs sm:text-sm text-neonCyan neon-text-cyan">
-                @CYBER_VIPER_94
+                @Lawranci
               </span>
               <span class="text-purple-400">•</span>
               <span id="profile-role"
                 class="font-tech text-base sm:text-lg text-purple-200 font-semibold tracking-wide">
-                Lead Game Architect & Sci-Fi Author
+                Lead Game Architect & Author
               </span>
             </div>
           </div>
@@ -281,12 +281,11 @@
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 py-3 border-y border-purple-800/50 font-tech">
             <div class="bg-[#120626]/80 p-2.5 border border-purple-700/40">
               <div class="text-[10px] font-arcade text-gray-400 uppercase">AGE</div>
-              <div id="profile-age" class="text-lg font-bold text-neonCyan font-cyber">26 YRS</div>
+              <div id="profile-age" class="text-lg font-bold text-neonCyan font-cyber">20 YRS</div>
             </div>
             <div class="bg-[#120626]/80 p-2.5 border border-purple-700/40">
               <div class="text-[10px] font-arcade text-gray-400 uppercase">NATIONALITY</div>
-              <div id="profile-nationality" class="text-sm font-bold text-pink-300 truncate font-cyber">Neo-Tokyo /
-                Brazil</div>
+              <div id="profile-nationality" class="text-sm font-bold text-pink-300 truncate font-cyber">Brasil</div>
             </div>
             <div class="bg-[#120626]/80 p-2.5 border border-purple-700/40">
               <div class="text-[10px] font-arcade text-gray-400 uppercase">HP POOL</div>
@@ -300,8 +299,7 @@
 
           <!-- Bio Description -->
           <p id="profile-bio" class="font-tech text-base sm:text-lg text-gray-300 leading-relaxed">
-            Forging 16-bit retro-futuristic virtual worlds and neon-soaked cyberpunk sagas. Living at the intersection
-            of 90s arcade nostalgia, synthesized frequencies, and next-gen interactive fiction.
+            Forging worlds for entertainment.
           </p>
 
           <!-- Action Buttons -->
@@ -598,7 +596,7 @@
           <button type="button" data-key="backspace"
             class="keypad-btn p-3 bg-blue-950/80 border border-blue-700 text-blue-300 font-arcade text-[10px] hover:bg-blue-700 hover:text-white">⌫</button>
         </div>
- 
+
         <button type="submit"
           class="cyber-btn w-full text-xs border-yellow-400 text-yellow-300 hover:bg-yellow-400 hover:text-black mt-2">
           AUTHENTICATE ADM ▶
@@ -755,10 +753,17 @@
           </div>
         </div>
 
-        <div>
-          <label class="block font-arcade text-[10px] text-gray-300 mb-1">TITLE / SPECIALIZATION:</label>
-          <input type="text" id="edit-profile-role" required
-            class="w-full p-2.5 bg-[#0a0218] border border-cyan-700 text-white font-tech focus:border-neonCyan focus:outline-none" />
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block font-arcade text-[10px] text-gray-300 mb-1">TITLE / SPECIALIZATION:</label>
+            <input type="text" id="edit-profile-role" required
+              class="w-full p-2.5 bg-[#0a0218] border border-cyan-700 text-white font-tech focus:border-neonCyan focus:outline-none" />
+          </div>
+          <div>
+            <label class="block font-arcade text-[10px] text-gray-300 mb-1">SPECIAL CLASS / BADGE:</label>
+            <input type="text" id="edit-profile-special-class" placeholder="Magician"
+              class="w-full p-2.5 bg-[#0a0218] border border-cyan-700 text-white font-tech focus:border-neonCyan focus:outline-none" />
+          </div>
         </div>
 
         <div>
