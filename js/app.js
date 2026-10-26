@@ -41,6 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const profileHp = document.getElementById('profile-hp');
   const profileMp = document.getElementById('profile-mp');
   const profileScore = document.getElementById('profile-score');
+  const profileSpecialClass = document.getElementById('profile-special-class');
+  const profileLevel = document.getElementById('profile-level');
   const profileEditBtn = document.getElementById('profile-edit-btn');
 
   // Games Elements
@@ -114,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const profile = window.dataStore.getProfile();
     if (!profile) return;
 
-    if (profileAvatar) profileAvatar.src = profile.avatar || 'assets/avatar.jpg';
+    if (profileAvatar) profileAvatar.src = profile.avatar || 'assets/avatar.png';
     if (profileName) profileName.textContent = profile.name;
     if (profileNickname) profileNickname.textContent = `@${profile.nickname}`;
     if (profileAge) profileAge.textContent = `${profile.age} YRS`;
@@ -124,6 +126,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (profileHp) profileHp.textContent = profile.hp || '100 / 100';
     if (profileMp) profileMp.textContent = profile.mp || '96 / 100';
     if (profileScore) profileScore.textContent = profile.score || '994,200';
+    if (profileSpecialClass) profileSpecialClass.textContent = `★ ${profile.specialClass || 'Magician'}`;
+    if (profileLevel) profileLevel.textContent = `LVL ${profile.level || '20'}`;
 
     if (profile.contact) {
       const yt = document.getElementById('contact-link-youtube');
@@ -960,9 +964,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('edit-profile-age').value = profile.age || '';
     document.getElementById('edit-profile-nationality').value = profile.nationality || '';
     document.getElementById('edit-profile-role').value = profile.role || '';
+    const specClassInput = document.getElementById('edit-profile-special-class');
+    if (specClassInput) specClassInput.value = profile.specialClass || 'Magician';
     document.getElementById('edit-profile-bio').value = profile.bio || '';
     document.getElementById('edit-profile-avatar-url').value = profile.avatar || '';
-    document.getElementById('edit-profile-preview-avatar').src = profile.avatar || 'assets/avatar.jpg';
+    document.getElementById('edit-profile-preview-avatar').src = profile.avatar || 'assets/avatar.png';
 
     if (profileModal) profileModal.classList.remove('hidden');
   }
@@ -986,7 +992,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const profileAvatarUrlInput = document.getElementById('edit-profile-avatar-url');
   if (profileAvatarUrlInput) {
     profileAvatarUrlInput.addEventListener('input', (e) => {
-      document.getElementById('edit-profile-preview-avatar').src = e.target.value.trim() || 'assets/avatar.jpg';
+      document.getElementById('edit-profile-preview-avatar').src = e.target.value.trim() || 'assets/avatar.png';
     });
   }
 
@@ -994,14 +1000,16 @@ document.addEventListener('DOMContentLoaded', () => {
   if (profileEditorForm) {
     profileEditorForm.addEventListener('submit', (e) => {
       e.preventDefault();
+      const specClassInput = document.getElementById('edit-profile-special-class');
       const updated = {
         name: document.getElementById('edit-profile-name').value.trim(),
         nickname: document.getElementById('edit-profile-nickname').value.trim(),
         age: document.getElementById('edit-profile-age').value.trim(),
         nationality: document.getElementById('edit-profile-nationality').value.trim(),
         role: document.getElementById('edit-profile-role').value.trim(),
+        specialClass: specClassInput ? specClassInput.value.trim() : 'Magician',
         bio: document.getElementById('edit-profile-bio').value.trim(),
-        avatar: document.getElementById('edit-profile-avatar-url').value.trim() || 'assets/avatar.jpg'
+        avatar: document.getElementById('edit-profile-avatar-url').value.trim() || 'assets/avatar.png'
       };
       window.dataStore.updateProfile(updated);
       renderProfile();

@@ -3,7 +3,7 @@
  * Handles persistent Profile, Games, and Books collections with ADM edit capabilities
  */
 
-const STORAGE_KEY = 'synthwave_portfolio_master_v2';
+const STORAGE_KEY = 'lorenzzo-portfolio';
 
 const DEFAULT_PROFILE = {
   name: "Lorenzzo Austriquinio Accioly",
@@ -12,7 +12,7 @@ const DEFAULT_PROFILE = {
   nationality: "Brasil",
   role: "Lead Game Architect & Author",
   bio: "Forging worlds for entertainment.",
-  avatar: "assets/avatar2.png",
+  avatar: "assets/avatar.png",
   level: "20",
   hp: "100 / 100",
   mp: "96 / 100",
@@ -20,7 +20,7 @@ const DEFAULT_PROFILE = {
   specialClass: "Magician",
   contact: {
     youtube: "https://youtube.com/@LawranciDasGameplays",
-    discord: "https://discord.gg/synthwave-haven",
+    discord: "https://discord.gg/lord_phantomius_x",
     whatsapp: "https://wa.me/5511920182534",
     email: "mailto:lorenzzo.accioly@hotmail.com"
   }
@@ -29,60 +29,18 @@ const DEFAULT_PROFILE = {
 const DEFAULT_GAMES = [
   {
     id: "game-1",
-    title: "Cyber Racer Ultimate: The Outrun Challenge",
+    title: "Onslaught",
     category: "official", // "official" | "fangame"
     categoryLabel: "Official Game",
-    year: "1996 / Remastered 2024",
-    platform: "PC / Steam / Mega Drive",
+    year: "2026",
+    platform: "PC",
     rating: "5.0",
-    tags: ["Arcade Racing", "Synthwave", "Outrun 90s"],
-    cover: "assets/game_racer.jpg",
-    description: "An adrenaline-fueled retro racing experience featuring turbocharged 90s supercars drifting down infinite neon wireframe highways. Experience responsive drifting physics, dynamic police pursuits, and a killer analog synthesizer soundtrack.",
+    tags: ["High-Mobility Combat & Tactical Evasion, 6-Tier Weapon Arsenal Progression, Hostile Machine Roster, Authentic PSX Retro Aesthetic Pipeline"],
+    cover: "assets/GAMECOVER_ONSLAUGHT.png",
+    description: "An adrenaline-fueled, high-octane retro arena shooter that thrusts you into an enclosed holographic simulation arena surrounded by rogue automated war machines. Armed initially with nothing but an energized cybernetic blade, you must outmaneuver flanking hunter units, aerial strike drones, and heavy artillery mechs to survive across 15 escalating waves of tactical combat.",
     playUrl: "https://store.steampowered.com",
     badge: "16-BIT CLASSIC"
   },
-  {
-    id: "game-2",
-    title: "Galactic Phantom: Neon Fury",
-    category: "official",
-    categoryLabel: "Official Game",
-    year: "1998 / Remastered 2025",
-    platform: "PC-98 / Steam / Switch",
-    rating: "4.9",
-    tags: ["Shmup", "Bullet Hell", "Space Action"],
-    cover: "assets/game_space.jpg",
-    description: "Vertical arcade shooter set in the neon asteroid belt of Saturn. Command the experimental FX-99 fighter ship against cosmic dreadnoughts, bullet cascades, and synth boss encounters with authentic FM synth audio.",
-    playUrl: "https://store.steampowered.com",
-    badge: "PC-98 EDITION"
-  },
-  {
-    id: "game-3",
-    title: "Cyber Ninja: Neon Shadows",
-    category: "fangame",
-    categoryLabel: "Fangame",
-    year: "1995 / Fan Revival 2024",
-    platform: "Sega Genesis / Mega Drive ROM",
-    rating: "4.8",
-    tags: ["16-Bit Action", "Hack & Slash", "Fangame"],
-    cover: "assets/game_ninja.jpg",
-    description: "A high-octane 16-bit tribute to retro side-scrolling ninja classics. Leap between illuminated cyber-skyscrapers, deflect laser projectiles with your hyper-frequency blade, and take down the Shinobi Syndicate.",
-    playUrl: "https://itch.io",
-    badge: "GENESIS TRIBUTE"
-  },
-  {
-    id: "game-4",
-    title: "Mega Synth: Zero Protocol",
-    category: "fangame",
-    categoryLabel: "Fangame",
-    year: "1997 / Fan Edition",
-    platform: "Retro Arcade / ROM",
-    rating: "4.9",
-    tags: ["Run & Gun", "Platformer", "Fan Tribute"],
-    cover: "assets/game_megasynth.jpg",
-    description: "A fan-created love letter to classic blue-bomber run-and-gun platformers, reimagined with outrun color palettes, responsive wall-jumps, dynamic weapon switching, and chiptune synth metal.",
-    playUrl: "https://itch.io",
-    badge: "ARCADE EDITION"
-  }
 ];
 
 const DEFAULT_BOOKS = [
@@ -96,51 +54,9 @@ const DEFAULT_BOOKS = [
     pages: "480 Pages",
     tags: ["Cyberpunk", "Dystopian Sci-Fi", "Noir Mystery"],
     cover: "assets/book_cassiopeia.png",
-    summary: "In the sprawling vertical megacity of New Kyoto, neural detective Jason Vance uncovers an illegal synthetic consciousness buried within the mainframe of Megacorp Industries. A thrilling noir novel of corporate espionage, cybernetic morality, and neon-lit street rebellion.",
+    summary: "Faustin nasceu no Império do Solstício. Rosalinda fugiu da Federação de Cassiopéia. Na República de Auriga, os dois construíram uma vida simples numa casa azul, entre oficina, sala de aula e caminhadas ao longo do rio. Então chegam as cartas de convocação, uma para cada lado da guerra. Restam onze dias. Quando Auriga se torna o campo de batalha da Grande Guerra, o amor dos dois passa a ser a única coisa que o conflito não sabe calcular. Mas alguém está observando, e quer entender por quê.",
     readUrl: "https://amazon.com",
     badge: "BESTSELLER"
-  },
-  {
-    id: "book-2",
-    title: "Synth Saga: Zero",
-    category: "original",
-    categoryLabel: "Original Book",
-    author: "Alex 'CyberViper' Sterling",
-    year: "1999",
-    pages: "360 Pages",
-    tags: ["Anime Sci-Fi", "Mecha", "Cyberpunk Saga"],
-    cover: "assets/book_synthsaga.jpg",
-    summary: "Volume 1 of the renowned Cybernetic Chronicles. Follow mercenary pilot Leo Akiyama as she navigates the holographic underbelly of Neo-Tokyo, armed with an experimental plasma katana and an enigmatic bio-chip that could reset humanity's future.",
-    readUrl: "https://amazon.com",
-    badge: "ORIGINAL SAGA"
-  },
-  {
-    id: "book-3",
-    title: "Neon Genesis Tribute // Fan Archive",
-    category: "fanbook",
-    categoryLabel: "Fanbook",
-    author: "Alex Sterling & Community",
-    year: "1999 / Collector Print",
-    pages: "220 Pages (Full Color)",
-    tags: ["Artbook", "Mecha Tribute", "Fan Lore"],
-    cover: "assets/book_eva_tribute.jpg",
-    summary: "An expansive, commemorative fan artbook and retrospective tribute celebrating 90s biomechanical mecha sagas. Features in-depth lore analyses, unreleased concept sketches, holographic battle scenes, and reflective author essays.",
-    readUrl: "https://gumroad.com",
-    badge: "FAN ARTBOOK"
-  },
-  {
-    id: "book-4",
-    title: "Chrono Drift: The 1999 Paradox",
-    category: "fanbook",
-    categoryLabel: "Fanbook",
-    author: "Alex Sterling",
-    year: "1998 / Fanfic Compendium",
-    pages: "310 Pages",
-    tags: ["Time Travel", "RPG Fanfic", "Retro Tribute"],
-    cover: "assets/book_synthsaga.jpg",
-    summary: "An unauthorized tribute novel expanding on classic time-hopping RPG universes. When a temporal ripple threatens to erase the golden era of 1999, a renegade team of net-runners and chronomancers jump across shattered neon timelines.",
-    readUrl: "https://archiveofourown.org",
-    badge: "FAN NOVEL"
   }
 ];
 
@@ -152,9 +68,20 @@ class DataStore {
   loadData() {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
+      const storedSig = localStorage.getItem(STORAGE_KEY + '_profile_sig');
+      const currentSig = JSON.stringify(DEFAULT_PROFILE);
+
       if (stored) {
         const parsed = JSON.parse(stored);
         if (parsed.profile && parsed.games && parsed.books) {
+          // Automatically sync any manual code edits in DEFAULT_PROFILE
+          if (storedSig !== currentSig) {
+            parsed.profile = { ...parsed.profile, ...DEFAULT_PROFILE };
+            try {
+              localStorage.setItem(STORAGE_KEY + '_profile_sig', currentSig);
+            } catch (e) { }
+            this.saveData(parsed);
+          }
           return parsed;
         }
       }
@@ -166,6 +93,9 @@ class DataStore {
       games: [...DEFAULT_GAMES],
       books: [...DEFAULT_BOOKS]
     };
+    try {
+      localStorage.setItem(STORAGE_KEY + '_profile_sig', JSON.stringify(DEFAULT_PROFILE));
+    } catch (e) { }
     this.saveData(initial);
     return initial;
   }
