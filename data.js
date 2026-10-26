@@ -12,7 +12,7 @@ const DEFAULT_PROFILE = {
   nationality: "Brasil",
   role: "Lead Game Architect & Author",
   bio: "Forging worlds for entertainment.",
-  avatar: "assets/avatar2.png",
+  avatar: "assets/avatar.png",
   level: "20",
   hp: "100 / 100",
   mp: "96 / 100",
@@ -20,7 +20,7 @@ const DEFAULT_PROFILE = {
   specialClass: "Magician",
   contact: {
     youtube: "https://youtube.com/@LawranciDasGameplays",
-    discord: "https://discord.gg/synthwave-haven",
+    discord: "https://discord.gg/lord_phantomius_x",
     whatsapp: "https://wa.me/5511920182534",
     email: "mailto:lorenzzo.accioly@hotmail.com"
   }
@@ -54,7 +54,7 @@ const DEFAULT_BOOKS = [
     pages: "480 Pages",
     tags: ["Cyberpunk", "Dystopian Sci-Fi", "Noir Mystery"],
     cover: "assets/book_cassiopeia.png",
-    summary: "In the sprawling vertical megacity of New Kyoto, neural detective Jason Vance uncovers an illegal synthetic consciousness buried within the mainframe of Megacorp Industries. A thrilling noir novel of corporate espionage, cybernetic morality, and neon-lit street rebellion.",
+    summary: "Faustin nasceu no Império do Solstício. Rosalinda fugiu da Federação de Cassiopéia. Na República de Auriga, os dois construíram uma vida simples numa casa azul, entre oficina, sala de aula e caminhadas ao longo do rio. Então chegam as cartas de convocação, uma para cada lado da guerra. Restam onze dias. Quando Auriga se torna o campo de batalha da Grande Guerra, o amor dos dois passa a ser a única coisa que o conflito não sabe calcular. Mas alguém está observando, e quer entender por quê.",
     readUrl: "https://amazon.com",
     badge: "BESTSELLER"
   }
