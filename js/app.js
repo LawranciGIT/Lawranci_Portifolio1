@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     booksFilter: 'all', // 'all' | 'original' | 'fanbook'
     booksSearch: '',
     crtActive: localStorage.getItem('synthwave_crt') !== 'false', // default ON for authentic 90s retro feel!
+    gridMotion: localStorage.getItem('synthwave_grid_motion') !== 'false', // default ON
     modalActive: null
   };
 
@@ -22,8 +23,17 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.remove('crt-active');
   }
 
+  // Initialize Grid Motion
+  if (!state.gridMotion) {
+    document.body.classList.add('grid-paused');
+  } else {
+    document.body.classList.remove('grid-paused');
+  }
+
   // DOM Elements
   const crtToggleBtn = document.getElementById('crt-toggle-btn');
+  const gridToggleBtn = document.getElementById('grid-toggle-btn');
+  const mobileGridToggleBtn = document.getElementById('mobile-grid-toggle-btn');
   const soundToggleBtn = document.getElementById('sound-toggle-btn');
   const bgmToggleBtn = document.getElementById('bgm-toggle-btn');
   const admLoginBtn = document.getElementById('adm-login-btn');
@@ -1241,6 +1251,59 @@ document.addEventListener('DOMContentLoaded', () => {
         showToast('CRT DISABLED', 'Modern high-definition view restored.', 'pink');
       }
     });
+  }
+
+  // ==========================================
+  // GRID MOTION CONTROL (FREEZE / RESUME)
+  // ==========================================
+  function updateGridToggleUI(isActive) {
+    const label = isActive ? '🌐 GRID [ON]' : '🌐 GRID [OFF]';
+    if (gridToggleBtn) {
+      gridToggleBtn.innerHTML = label;
+      if (isActive) {
+        gridToggleBtn.classList.add('text-[#ff007f]', 'border-[#ff007f]/60');
+        gridToggleBtn.classList.remove('text-gray-400', 'border-gray-600/60');
+      } else {
+        gridToggleBtn.classList.remove('text-[#ff007f]', 'border-[#ff007f]/60');
+        gridToggleBtn.classList.add('text-gray-400', 'border-gray-600/60');
+      }
+    }
+    if (mobileGridToggleBtn) {
+      mobileGridToggleBtn.innerHTML = label;
+      if (isActive) {
+        mobileGridToggleBtn.classList.add('text-[#ff007f]', 'border-[#ff007f]/60');
+        mobileGridToggleBtn.classList.remove('text-gray-400', 'border-gray-600/60');
+      } else {
+        mobileGridToggleBtn.classList.remove('text-[#ff007f]', 'border-[#ff007f]/60');
+        mobileGridToggleBtn.classList.add('text-gray-400', 'border-gray-600/60');
+      }
+    }
+  }
+
+  function toggleGridMotion() {
+    window.retroAudio.playClick();
+    state.gridMotion = !state.gridMotion;
+    localStorage.setItem('synthwave_grid_motion', state.gridMotion);
+
+    if (state.gridMotion) {
+      document.body.classList.remove('grid-paused');
+      updateGridToggleUI(true);
+      showToast('GRID MOTION ENGAGED', 'Perspective cyber grid movement activated.', 'pink');
+    } else {
+      document.body.classList.add('grid-paused');
+      updateGridToggleUI(false);
+      showToast('GRID MOTION FROZEN', 'Perspective grid animation paused.', 'cyan');
+    }
+  }
+
+  if (gridToggleBtn) {
+    updateGridToggleUI(state.gridMotion);
+    gridToggleBtn.addEventListener('click', toggleGridMotion);
+  }
+
+  if (mobileGridToggleBtn) {
+    updateGridToggleUI(state.gridMotion);
+    mobileGridToggleBtn.addEventListener('click', toggleGridMotion);
   }
 
   if (soundToggleBtn) {

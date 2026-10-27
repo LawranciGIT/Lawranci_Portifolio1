@@ -272,6 +272,18 @@ body {
   }
 }
 
+/* Disable / pause grid movement */
+body.grid-paused .synthwave-grid-plane,
+.synthwave-grid-plane.paused {
+  animation-play-state: paused !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .synthwave-grid-plane {
+    animation-play-state: paused;
+  }
+}
+
 /* ==========================================================================
    CRT SCANLINE & RETRO SCREEN OVERLAY
    ========================================================================== */
