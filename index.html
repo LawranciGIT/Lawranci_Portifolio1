@@ -42,14 +42,180 @@
 </head>
 
 <body
-  class="bg-[#08020f] text-gray-200 min-h-screen relative flex flex-col font-tech selection:bg-neonPink selection:text-white">
+  class="bg-transparent text-gray-200 min-h-screen relative flex flex-col font-tech selection:bg-neonPink selection:text-white">
 
   <!-- =========================================================================
        ANIMATED SYNTHWAVE PERSPECTIVE GRID & RETRO SKYLINE BACKGROUND
        ========================================================================= -->
   <div class="synthwave-bg-container" aria-hidden="true">
     <div class="synthwave-stars"></div>
-    <div class="synthwave-sun"></div>
+    <div class="synthwave-sun-wrap">
+      <svg class="synthwave-sun-svg" viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="outrun-sun-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#fff443" />
+            <stop offset="25%" stop-color="#ffb703" />
+            <stop offset="50%" stop-color="#fb5607" />
+            <stop offset="75%" stop-color="#ff007f" />
+            <stop offset="100%" stop-color="#cc0066" />
+          </linearGradient>
+          <mask id="outrun-stripes">
+            <circle cx="180" cy="180" r="175" fill="#ffffff" />
+            <rect x="0" y="180" width="360" height="4" fill="#000000" />
+            <rect x="0" y="196" width="360" height="6" fill="#000000" />
+            <rect x="0" y="214" width="360" height="8" fill="#000000" />
+            <rect x="0" y="234" width="360" height="11" fill="#000000" />
+            <rect x="0" y="258" width="360" height="14" fill="#000000" />
+            <rect x="0" y="285" width="360" height="18" fill="#000000" />
+            <rect x="0" y="316" width="360" height="22" fill="#000000" />
+            <rect x="0" y="350" width="360" height="26" fill="#000000" />
+          </mask>
+        </defs>
+        <circle cx="180" cy="180" r="175" fill="url(#outrun-sun-grad)" mask="url(#outrun-stripes)" />
+      </svg>
+    </div>
+    <div class="synthwave-mountains-wrap">
+      <svg class="synthwave-mountains-svg" viewBox="0 0 1440 280" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="wire-glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="2" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+        <g class="mountains-mesh">
+          <polygon points="810.0,205.0 780.0,270.0 840.0,270.0" fill="#060217" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="60.0,210.0 0.0,240.0 60.0,230.0" fill="#08031d" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="160.0,80.0 130.0,140.0 190.0,120.0" fill="#050114" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="130.0,140.0 210.0,140.0 190.0,120.0" fill="#0a0422" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="310.0,160.0 260.0,190.0 330.0,190.0" fill="#07021a" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="430.0,140.0 400.0,170.0 460.0,160.0" fill="#060217" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="540.0,130.0 520.0,160.0 580.0,160.0" fill="#08031d" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="660.0,145.0 640.0,165.0 710.0,180.0" fill="#050114" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="710.0,180.0 740.0,195.0 770.0,190.0" fill="#0a0422" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="930.0,135.0 880.0,70.0 900.0,110.0" fill="#07021a" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="880.0,70.0 840.0,130.0 900.0,110.0" fill="#060217" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1240.0,110.0 1180.0,150.0 1220.0,140.0" fill="#08031d" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1300.0,160.0 1240.0,110.0 1280.0,170.0" fill="#050114" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1240.0,110.0 1220.0,140.0 1280.0,170.0" fill="#0a0422" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1240.0,110.0 1300.0,160.0 1350.0,190.0" fill="#07021a" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1370.0,200.0 1240.0,110.0 1350.0,190.0" fill="#060217" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1440.0,230.0 1370.0,200.0 1400.0,220.0" fill="#08031d" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="0.0,240.0 0.0,270.0 40.0,255.0" fill="#050114" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="0.0,270.0 60.0,270.0 40.0,255.0" fill="#0a0422" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="60.0,270.0 60.0,230.0 40.0,255.0" fill="#07021a" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="60.0,230.0 0.0,240.0 40.0,255.0" fill="#060217" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="110.0,180.0 60.0,210.0 100.0,240.0" fill="#08031d" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="60.0,210.0 60.0,230.0 100.0,240.0" fill="#050114" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="60.0,270.0 120.0,270.0 100.0,240.0" fill="#0a0422" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="60.0,230.0 60.0,270.0 100.0,240.0" fill="#07021a" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="210.0,140.0 130.0,140.0 160.0,220.0" fill="#060217" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="130.0,140.0 110.0,180.0 160.0,220.0" fill="#08031d" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="240.0,170.0 210.0,140.0 160.0,220.0" fill="#050114" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="120.0,270.0 180.0,270.0 160.0,220.0" fill="#0a0422" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="100.0,240.0 120.0,270.0 160.0,220.0" fill="#07021a" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="110.0,180.0 100.0,240.0 160.0,220.0" fill="#060217" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="180.0,270.0 240.0,270.0 220.0,230.0" fill="#08031d" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="160.0,220.0 180.0,270.0 220.0,230.0" fill="#050114" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="260.0,190.0 240.0,170.0 220.0,230.0" fill="#0a0422" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="240.0,170.0 160.0,220.0 220.0,230.0" fill="#07021a" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="240.0,270.0 300.0,270.0 280.0,245.0" fill="#060217" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="330.0,190.0 260.0,190.0 280.0,245.0" fill="#08031d" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="260.0,190.0 220.0,230.0 280.0,245.0" fill="#050114" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="220.0,230.0 240.0,270.0 280.0,245.0" fill="#0a0422" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="300.0,270.0 360.0,270.0 350.0,235.0" fill="#07021a" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="370.0,200.0 330.0,190.0 350.0,235.0" fill="#060217" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="330.0,190.0 280.0,245.0 350.0,235.0" fill="#08031d" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="280.0,245.0 300.0,270.0 350.0,235.0" fill="#050114" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="420.0,270.0 480.0,270.0 420.0,225.0" fill="#0a0422" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="400.0,170.0 370.0,200.0 420.0,225.0" fill="#07021a" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="460.0,160.0 400.0,170.0 420.0,225.0" fill="#060217" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="360.0,270.0 420.0,270.0 420.0,225.0" fill="#08031d" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="350.0,235.0 360.0,270.0 420.0,225.0" fill="#050114" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="370.0,200.0 350.0,235.0 420.0,225.0" fill="#0a0422" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="480.0,270.0 540.0,270.0 490.0,230.0" fill="#07021a" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="520.0,160.0 490.0,175.0 490.0,230.0" fill="#060217" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="420.0,225.0 480.0,270.0 490.0,230.0" fill="#08031d" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="490.0,175.0 460.0,160.0 490.0,230.0" fill="#050114" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="460.0,160.0 420.0,225.0 490.0,230.0" fill="#0a0422" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="540.0,270.0 600.0,270.0 560.0,225.0" fill="#07021a" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="600.0,185.0 580.0,160.0 560.0,225.0" fill="#060217" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="580.0,160.0 520.0,160.0 560.0,225.0" fill="#08031d" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="520.0,160.0 490.0,230.0 560.0,225.0" fill="#050114" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="490.0,230.0 540.0,270.0 560.0,225.0" fill="#0a0422" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="600.0,270.0 660.0,270.0 630.0,225.0" fill="#07021a" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="640.0,165.0 600.0,185.0 630.0,225.0" fill="#060217" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="710.0,180.0 640.0,165.0 630.0,225.0" fill="#08031d" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="600.0,185.0 560.0,225.0 630.0,225.0" fill="#050114" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="560.0,225.0 600.0,270.0 630.0,225.0" fill="#0a0422" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="660.0,270.0 720.0,270.0 700.0,235.0" fill="#07021a" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="740.0,195.0 710.0,180.0 700.0,235.0" fill="#060217" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="710.0,180.0 630.0,225.0 700.0,235.0" fill="#08031d" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="630.0,225.0 660.0,270.0 700.0,235.0" fill="#050114" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="720.0,270.0 780.0,270.0 770.0,240.0" fill="#0a0422" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="770.0,190.0 740.0,195.0 770.0,240.0" fill="#07021a" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="780.0,270.0 810.0,205.0 770.0,240.0" fill="#060217" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="810.0,205.0 770.0,190.0 770.0,240.0" fill="#08031d" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="740.0,195.0 700.0,235.0 770.0,240.0" fill="#050114" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="700.0,235.0 720.0,270.0 770.0,240.0" fill="#0a0422" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="810.0,205.0 840.0,270.0 840.0,215.0" fill="#07021a" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="840.0,270.0 900.0,270.0 840.0,215.0" fill="#060217" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="840.0,130.0 810.0,205.0 840.0,215.0" fill="#08031d" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="930.0,135.0 900.0,110.0 900.0,205.0" fill="#050114" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="900.0,110.0 840.0,130.0 900.0,205.0" fill="#0a0422" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="840.0,130.0 840.0,215.0 900.0,205.0" fill="#07021a" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="840.0,215.0 900.0,270.0 900.0,205.0" fill="#060217" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="950.0,150.0 930.0,135.0 900.0,205.0" fill="#08031d" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="900.0,270.0 960.0,270.0 960.0,225.0" fill="#050114" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="900.0,205.0 900.0,270.0 960.0,225.0" fill="#0a0422" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="980.0,180.0 950.0,150.0 960.0,225.0" fill="#07021a" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="950.0,150.0 900.0,205.0 960.0,225.0" fill="#060217" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1050.0,160.0 1010.0,180.0 1020.0,230.0" fill="#08031d" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1080.0,180.0 1050.0,160.0 1020.0,230.0" fill="#050114" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="960.0,270.0 1020.0,270.0 1020.0,230.0" fill="#0a0422" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="960.0,225.0 960.0,270.0 1020.0,230.0" fill="#07021a" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1010.0,180.0 980.0,180.0 1020.0,230.0" fill="#060217" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="980.0,180.0 960.0,225.0 1020.0,230.0" fill="#08031d" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1080.0,270.0 1140.0,270.0 1080.0,235.0" fill="#050114" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1120.0,190.0 1080.0,180.0 1080.0,235.0" fill="#0a0422" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1020.0,270.0 1080.0,270.0 1080.0,235.0" fill="#07021a" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1020.0,230.0 1020.0,270.0 1080.0,235.0" fill="#060217" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1080.0,180.0 1020.0,230.0 1080.0,235.0" fill="#08031d" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1150.0,170.0 1120.0,190.0 1150.0,225.0" fill="#050114" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1140.0,270.0 1200.0,270.0 1150.0,225.0" fill="#0a0422" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1120.0,190.0 1080.0,235.0 1150.0,225.0" fill="#07021a" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1080.0,235.0 1140.0,270.0 1150.0,225.0" fill="#060217" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1220.0,140.0 1180.0,150.0 1220.0,215.0" fill="#08031d" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1200.0,270.0 1260.0,270.0 1220.0,215.0" fill="#050114" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1280.0,170.0 1220.0,140.0 1220.0,215.0" fill="#0a0422" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1150.0,225.0 1200.0,270.0 1220.0,215.0" fill="#07021a" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1180.0,150.0 1150.0,170.0 1220.0,215.0" fill="#060217" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1150.0,170.0 1150.0,225.0 1220.0,215.0" fill="#08031d" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1260.0,270.0 1320.0,270.0 1290.0,235.0" fill="#050114" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1300.0,160.0 1280.0,170.0 1290.0,235.0" fill="#0a0422" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1350.0,190.0 1300.0,160.0 1290.0,235.0" fill="#07021a" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1280.0,170.0 1220.0,215.0 1290.0,235.0" fill="#060217" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1220.0,215.0 1260.0,270.0 1290.0,235.0" fill="#08031d" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1320.0,270.0 1380.0,270.0 1360.0,245.0" fill="#050114" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1370.0,200.0 1350.0,190.0 1360.0,245.0" fill="#0a0422" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1380.0,270.0 1400.0,220.0 1360.0,245.0" fill="#07021a" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1400.0,220.0 1370.0,200.0 1360.0,245.0" fill="#060217" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1350.0,190.0 1290.0,235.0 1360.0,245.0" fill="#08031d" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1290.0,235.0 1320.0,270.0 1360.0,245.0" fill="#050114" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1380.0,270.0 1440.0,270.0 1420.0,255.0" fill="#0a0422" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1400.0,220.0 1380.0,270.0 1420.0,255.0" fill="#07021a" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1440.0,270.0 1440.0,230.0 1420.0,255.0" fill="#060217" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polygon points="1440.0,230.0 1400.0,220.0 1420.0,255.0" fill="#08031d" stroke="#0055ff" stroke-width="1.8" stroke-linejoin="round" />
+          <polyline points="0,240 60,210 110,180 160,80 210,140 260,190 310,160 370,200 430,140 490,175 540,130 600,185 660,145 740,195 810,205 880,70 930,135 980,180 1050,160 1120,190 1180,150 1240,110 1300,160 1370,200 1440,230" fill="none" stroke="#00e5ff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" filter="url(#wire-glow)" />
+          <polyline points="160,80 190,120 220,230 240,270" fill="none" stroke="#00d4ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.85" />
+          <polyline points="540,130 580,160 630,225 660,270" fill="none" stroke="#00d4ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.85" />
+          <polyline points="880,70 900,110 900,205 900,270" fill="none" stroke="#00d4ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.85" />
+          <polyline points="1240,110 1220,140 1220,215 1200,270" fill="none" stroke="#00d4ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.85" />
+        </g>
+      </svg>
+    </div>
     <div class="synthwave-horizon"></div>
     <div class="synthwave-grid-floor">
       <div class="synthwave-grid-plane"></div>
